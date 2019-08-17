@@ -2,7 +2,6 @@ import * as crypto from "crypto";
 import * as fs from "fs";
 import * as puppeteer from "puppeteer";
 import * as webpack from "webpack";
-//import MemoryFileSystem from "memory-fs";
 const MemoryFileSystem = require("memory-fs");
 
 function getUUID(): string {
@@ -17,7 +16,8 @@ interface ICompilationResult {
 async function getJS(filePath: string): Promise<ICompilationResult> {
     return new Promise((resolve, reject) => {
         try {
-            if (!fs.existsSync(filePath)) throw `The entry file "${filePath}" doesn't exist`;
+            if (!fs.existsSync(filePath))
+                throw new Error(`The entry file "${filePath}" doesn't exist`);
 
             const uuid = `tmp_${getUUID()}`;
             const memoryFs = new MemoryFileSystem();

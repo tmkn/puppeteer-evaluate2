@@ -38,12 +38,7 @@ test(`lodash Test`, async t => {
 });
 
 test(`Fail on missing JavaScript file`, async t => {
-    try {
-        await evaluate2(null as any, `doesntexist.js`);
-        t.fail(`Should have thrown an exception`);
-    } catch {
-        t.pass();
-    }
+    await t.throwsAsync(() => evaluate2(null as any, `doesntexist.js`));
 });
 
 function _path(relativePath: string): string {
