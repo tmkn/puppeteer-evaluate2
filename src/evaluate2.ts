@@ -1,4 +1,5 @@
 import * as crypto from "crypto";
+import * as fs from "fs";
 import * as puppeteer from "puppeteer";
 import * as webpack from "webpack";
 //import MemoryFileSystem from "memory-fs";
@@ -14,22 +15,22 @@ interface ICompilationResult {
 }
 
 async function getJS(filePath: string): Promise<ICompilationResult> {
-    const outputName = "blabla.js";
-
     return new Promise((resolve, reject) => {
         try {
+            if (!fs.existsSync(filePath)) throw `The entry file "${filePath}" doesn't exist`;
+
             const uuid = `tmp_${getUUID()}`;
-            const fs = new MemoryFileSystem();
+            const memoryFs = new MemoryFileSystem();
             const compiler = webpack({
                 mode: "development",
                 entry: filePath,
                 output: {
                     library: uuid,
-                    filename: outputName,
+                    filename: uuid,
                     path: "/"
                 }
             });
-            compiler.outputFileSystem = fs;
+            compiler.outputFileSystem = memoryFs;
 
             compiler.run((err, status) => {
                 if (err) {
@@ -41,7 +42,7 @@ async function getJS(filePath: string): Promise<ICompilationResult> {
                     reject(info.errors);
                 }
 
-                let compiledJS = fs.readFileSync(`/${outputName}`, "utf8");
+                let compiledJS = memoryFs.readFileSync(`/${uuid}`, "utf8");
 
                 resolve({
                     src: compiledJS,
@@ -54,7 +55,11 @@ async function getJS(filePath: string): Promise<ICompilationResult> {
     });
 }
 
-export async function evaluate2<T = any>(page: puppeteer.Page, jsPath: string): Promise<T | void> {
+function hasDefaultExport(filePath: string): boolean {
+    return true;
+}
+
+export function evaluate2<T = any>(page: puppeteer.Page, jsPath: string): Promise<T> {
     return new Promise(async (resolve, reject) => {
         try {
             let { src, uuid } = await getJS(jsPath);
@@ -71,7 +76,7 @@ export async function evaluate2<T = any>(page: puppeteer.Page, jsPath: string): 
         } catch (e) {
             console.log(e);
 
-            reject();
+            reject(e);
         }
     });
 }

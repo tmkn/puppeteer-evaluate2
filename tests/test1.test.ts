@@ -37,6 +37,15 @@ test(`lodash Test`, async t => {
     server.close();
 });
 
+test(`Fail on missing JavaScript file`, async t => {
+    try {
+        await evaluate2(null as any, `doesntexist.js`);
+        t.fail(`Should have thrown an exception`);
+    } catch {
+        t.pass();
+    }
+});
+
 function _path(relativePath: string): string {
     return path.join(__dirname, `../..`, relativePath);
 }
