@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "tsc --watch",
     "prettier": "prettier --write \"{src,tests,utility}/**/{*.ts,*.js}\"",
-    "coverage": "nyc ava",
-    "test": "ava"
+    "coverage": "tsc && nyc ava",
+    "test": "tsc && ava"
   },
   "author": "tmkn",
   "license": "MIT",

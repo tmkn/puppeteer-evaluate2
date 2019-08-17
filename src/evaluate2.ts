@@ -61,8 +61,12 @@ export async function evaluate2<T = any>(page: puppeteer.Page, jsPath: string): 
                 content: src
             });
 
-            /* istanbul ignore next */
-            resolve(page.evaluate(uuid => (window[uuid] as any).default(), uuid));
+            resolve(
+                page.evaluate(
+                    /* istanbul ignore next */ uuid => (window[uuid] as any).default(),
+                    uuid
+                )
+            );
         } catch (e) {
             console.log(e);
 
