@@ -1,0 +1,37 @@
+{
+  "name": "puppeteer-evaluate2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./build/evaluate2.js",
+  "scripts": {
+    "dev": "tsc --watch",
+    "prettier": "prettier --write \"{src,tests,utility}/**/{*.ts,*.js}\"",
+    "coverage": "nyc ava",
+    "test": "ava"
+  },
+  "author": "tmkn",
+  "license": "MIT",
+  "dependencies": {
+    "memory-fs": "^0.4.1",
+    "puppeteer": "^1.19.0",
+    "typescript": "^3.5.3",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.6"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.0",
+    "@types/memory-fs": "^0.3.2",
+    "@types/node": "^12.7.2",
+    "@types/puppeteer": "^1.19.1",
+    "@types/webpack": "^4.32.1",
+    "ava": "^2.2.0",
+    "express": "^4.17.1",
+    "nyc": "^14.1.1",
+    "prettier": "^1.18.2"
+  },
+  "ava": {
+    "files": [
+      "build/tests/**/*"
+    ]
+  }
+}

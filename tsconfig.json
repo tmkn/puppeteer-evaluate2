@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "outDir": "build",
+        "sourceMap": true,
+        "target": "esnext",
+        "module": "commonjs",
+        "declaration": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "include": ["src", "tests"],
+
+}

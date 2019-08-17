@@ -1,0 +1,15 @@
+{
+    "cache": false,
+    "source-map": true,
+    "instrument": true,
+    "reporter": [
+        "lcov",
+        "text"
+    ],
+    "exclude": [
+        "tests/**"
+    ],
+    "extension": [
+        ".ts"
+    ]
+}
