@@ -21,6 +21,7 @@ async function getJS(filePath: string): Promise<ICompilationResult> {
             const uuid = `tmp_${getUUID()}`;
             const fs = new MemoryFileSystem();
             const compiler = webpack({
+                mode: "development",
                 entry: filePath,
                 output: {
                     library: uuid,

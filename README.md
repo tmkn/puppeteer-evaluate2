@@ -51,10 +51,9 @@ export default function() {
     //all your code
 }
 ```
-In fact, you can now import anything you want, any npm package like `React` or any other kind of import. It will just work.
+In fact, you can now import anything you want. It will just work.
 ```js
 //code.js
-import React from "react";
 import { foo } from "./util";
 
 export default function() {

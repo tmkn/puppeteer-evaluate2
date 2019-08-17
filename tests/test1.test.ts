@@ -11,7 +11,7 @@ test(`Basic Test`, async t => {
     const server = await MockServer.Create(port);
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    
+
     await page.goto(`http://localhost:${port}`);
 
     let innerText = await evaluate2<string>(page, _path(`./tests/code.js`));
@@ -21,7 +21,21 @@ test(`Basic Test`, async t => {
     server.close();
 });
 
-test.todo(`Complex Test`);
+test(`lodash Test`, async t => {
+    const port = 3001;
+    const server = await MockServer.Create(port);
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+
+    await page.goto(`http://localhost:${port}`);
+
+    let response = await evaluate2(page, _path(`./tests/code2.js`));
+    console.dir(JSON.stringify(response, null, 4));
+    t.deepEqual(response, [[1, 2], [3, 4]]);
+
+    await browser.close();
+    server.close();
+});
 
 function _path(relativePath: string): string {
     return path.join(__dirname, `../..`, relativePath);
