@@ -41,6 +41,10 @@ test(`Fail on missing JavaScript file`, async t => {
     await t.throwsAsync(() => evaluate2(null as any, `doesntexist.js`));
 });
 
+test(`Fail on missing default export function`, async t => {
+    await t.throwsAsync(() => evaluate2(null as any, _path(`./tests/nodefaultexport.js`)));
+});
+
 function _path(relativePath: string): string {
     return path.join(__dirname, `../..`, relativePath);
 }
