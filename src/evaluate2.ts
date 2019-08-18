@@ -20,7 +20,8 @@ async function getJS(filePath: string): Promise<ICompilationResult> {
             if (!fs.existsSync(filePath))
                 throw new Error(`The entry file "${filePath}" doesn't exist`);
 
-            if (!hasDefaultExport(filePath)) throw new Error(`No function as default export found`);
+            if (!hasDefaultExport(filePath))
+                throw new Error(`No default export function found in entry file "${filePath}"`);
 
             const uuid = `tmp_${getUUID()}`;
             const memoryFs = new MemoryFileSystem();
@@ -111,7 +112,7 @@ export function evaluate2<T = any>(page: puppeteer.Page, jsPath: string): Promis
                 )
             );
         } catch (e) {
-            console.log(e);
+            console.log(e.message);
 
             reject(e);
         }
