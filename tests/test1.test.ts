@@ -2,11 +2,10 @@ import * as path from "path";
 import { Server } from "http";
 import * as express from "express";
 import * as puppeteer from "puppeteer";
-import test from "ava";
 
 import { evaluate2 } from "../src/evaluate2";
 
-test(`Basic Test`, async t => {
+test(`Basic Test`, async () => {
     const port = 3000;
     const server = await MockServer.Create(port);
     const browser = await puppeteer.launch();
@@ -15,13 +14,13 @@ test(`Basic Test`, async t => {
     await page.goto(`http://localhost:${port}`);
 
     let innerText = await evaluate2<string>(page, _path(`./tests/code.js`));
-    t.is(innerText, `hello world`);
+    expect(innerText).toBe(`hello world`);
 
     await browser.close();
     server.close();
 });
 
-test(`lodash Test`, async t => {
+test(`lodash Test`, async () => {
     const port = 3001;
     const server = await MockServer.Create(port);
     const browser = await puppeteer.launch();
@@ -30,23 +29,34 @@ test(`lodash Test`, async t => {
     await page.goto(`http://localhost:${port}`);
 
     let response = await evaluate2(page, _path(`./tests/code2.js`));
-    console.dir(JSON.stringify(response, null, 4));
-    t.deepEqual(response, [[1, 2], [3, 4]]);
+    expect(response).toEqual([[1, 2], [3, 4]]);
 
     await browser.close();
     server.close();
 });
 
-test(`Fail on missing JavaScript file`, async t => {
-    await t.throwsAsync(() => evaluate2(null as any, `doesntexist.js`));
+test(`Fail on missing JavaScript file`, async () => {
+    expect.assertions(1);
+
+    try {
+        await evaluate2(null as any, `doesntexist.js`);
+    } catch (e) {
+        expect(e).toBeInstanceOf(Error);
+    }
 });
 
-test(`Fail on missing default export function`, async t => {
-    await t.throwsAsync(() => evaluate2(null as any, _path(`./tests/nodefaultexport.js`)));
+test(`Fail on missing default export function`, async () => {
+    expect.assertions(1);
+
+    try {
+        await evaluate2(null as any, _path(`./tests/nodefaultexport.js`));
+    } catch (e) {
+        expect(e).toBeInstanceOf(Error);
+    }
 });
 
 function _path(relativePath: string): string {
-    return path.join(__dirname, `../..`, relativePath);
+    return path.join(__dirname, `../`, relativePath);
 }
 
 class MockServer {
