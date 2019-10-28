@@ -1,6 +1,6 @@
 {
   "name": "puppeteer-evaluate2",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta.1",
   "description": "Easily create a js bundle for your puppeteer evaluate code.",
   "main": "./build/src/evaluate2.js",
   "scripts": {
