@@ -15,6 +15,7 @@
   "dependencies": {
     "memory-fs": "^0.4.1",
     "puppeteer": "^1.19.0",
+    "typescript": "^3.6.3",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.6"
   },
@@ -29,7 +30,6 @@
     "jest": "^24.9.0",
     "lodash": "^4.17.15",
     "prettier": "^1.18.2",
-    "ts-jest": "^24.1.0",
-    "typescript": "^3.6.3"
+    "ts-jest": "^24.1.0"
   }
 }
