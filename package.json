@@ -2,7 +2,7 @@
   "name": "puppeteer-evaluate2",
   "version": "1.0.0",
   "description": "",
-  "main": "./build/evaluate2.js",
+  "main": "./build/src/evaluate2.js",
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
