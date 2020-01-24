@@ -27,9 +27,9 @@
     "@types/puppeteer": "^2.0.0",
     "@types/webpack": "^4.32.1",
     "express": "^4.17.1",
-    "jest": "^24.9.0",
+    "jest": "^25.1.0",
     "lodash": "^4.17.15",
     "prettier": "^1.18.2",
-    "ts-jest": "^24.1.0"
+    "ts-jest": "^25.0.0"
   }
 }
