@@ -24,7 +24,7 @@
     "@types/jest": "^24.0.20",
     "@types/memory-fs": "^0.3.2",
     "@types/node": "^13.1.6",
-    "@types/puppeteer": "^2.0.0",
+    "@types/puppeteer": "^5.4.1",
     "@types/webpack": "^4.32.1",
     "express": "^4.17.1",
     "jest": "^24.9.0",
